@@ -10,11 +10,12 @@ struct Node* head;
 int listSize = -1;
 
 void push(int data){
-  struct Node* newNode = (Node*)malloc(sizeof(struct Node));
+  struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
   newNode->data = data;
   newNode->next = NULL;
   if(head == NULL){
     head = newNode;
+    listSize++;
     return;
   }
   struct Node* iter = head;
@@ -22,6 +23,40 @@ void push(int data){
     iter = iter->next;
   }
   iter->next = newNode;
+  listSize++;
+}
+
+void pop(){
+  if(head == NULL || listSize == -1){
+    printf("The list is already empty\n");
+    return;
+  }else if(listSize == 0){
+    struct Node* temp = head;
+    free(temp);
+    head = NULL;
+    listSize--;
+    return;
+  }
+  int i;
+  struct Node* iter = head;
+  for(i = 0; i < listSize-1; i++){
+    iter = iter->next;
+  }
+  free(iter->next);
+  iter->next = NULL;
+  listSize--;
+}
+
+void display(){
+  struct Node* temp = head;
+  if(listSize == -1 || head == NULL){
+    printf("Nothing to display, the list is empty\n");
+    return;
+  }
+  while(temp != NULL){
+    printf("%d ", temp->data);
+    temp = temp->next;
+  }printf("\n");
 }
 
 int main(){
@@ -38,15 +73,25 @@ int main(){
 
     int choice;
     printf("Enter your choice: ");
-    scanf("%d\n", &choice);
+    scanf("%d", &choice);
 
     switch(choice){
 
     case 1:
-      int data;
       printf("Enter data to push: ");
-      scanf("%d\n", &data);
+      int data;
+      scanf("%d", &data);
       push(data);
+      display();
+      break;
+
+    case 2:
+      pop();
+      display();
+      break;
+
+    case 6:
+      display();
       break;
 
     default:
