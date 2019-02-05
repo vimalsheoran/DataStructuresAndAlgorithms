@@ -7,22 +7,24 @@ struct Node{
 };
 
 struct Node* head;
-int listSize = -1;
+int listSize = 0;
 
 void push(int data){
   struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
   newNode->data = data;
-  newNode->next = NULL;
   if(head == NULL){
+    newNode->next = head;
     head = newNode;
     listSize++;
     return;
   }
   struct Node* iter = head;
-  while(iter != NULL){
+  
+  while(iter->next != NULL){
     iter = iter->next;
   }
   iter->next = newNode;
+  newNode->next = NULL;
   listSize++;
 }
 
@@ -47,6 +49,80 @@ void pop(){
   listSize--;
 }
 
+void insert(int data, int pos){
+  if(pos == listSize || (head == NULL && pos == 1)){
+    push(data);
+    return;
+  }else if(pos > listSize || pos <= 0){
+    printf("Index out of bound, please check the list size and try again\n");
+    return;
+  }else if(pos == 1){
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->next = head;
+    head = newNode;
+    return;
+  }
+  struct Node* iter = head;
+  struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+  int i;
+  for(i = 0; i < pos-2; i++){
+    iter = iter->next;
+  }
+  newNode->data = data;
+  newNode->next = iter->next;
+  iter->next = newNode;
+}
+
+void delete(int pos){
+  if(pos > listSize || pos <= 0){
+    printf("Index out of bound, please check the list size and try again\n");
+   return;
+  }else if(pos == listSize){
+    pop();
+    return;
+  }else if(pos == 1){
+    struct Node* iter = head;
+    head = iter->next;
+    free(iter);
+    return;
+  }else if(listSize == 1){
+    pop();
+    return;
+  }
+  struct Node* iter = head;
+  int i;
+  for(i = 0; i < pos-1; i++){
+    iter = iter->next;
+  }
+  struct Node* nodeToDelete = iter->next;
+  iter->next = nodeToDelete->next;
+  free(nodeToDelete);
+}
+
+void forwardPrintWithRecursion(struct Node* head){
+  if(head == NULL) return;
+  printf("%d ", head->data);
+  forwardPrintWithRecursion(head->next);
+}
+
+void reversePrintWithRecursion(struct Node* head){
+  if(head == NULL) return;
+  reversePrintWithRecursion(head -> next);
+  printf("%d ", head->data);
+}
+
+void reverseListWithRecursion(struct Node* current){
+  if(current->next == NULL){
+    head = current;
+    return;
+  }
+  reverseListWithRecursion(current->next);
+  struct Node* prev = current->next;
+  prev->next = current;
+  current->next = NULL;
+}
+
 void display(){
   struct Node* temp = head;
   if(listSize == -1 || head == NULL){
@@ -59,22 +135,33 @@ void display(){
   }printf("\n");
 }
 
+void size(){
+  printf("Size of the list is: %d\n", listSize);
+}
+
 int main(){
    head = NULL;
    while(1){
 
-    printf("Welcome to linked list\n");
-    printf("1. Push to the list\n");
-    printf("2. Pop from the list\n");
-    printf("3. Insert at a position\n");
-    printf("4. Delete from a position\n");
-    printf("5. Display list size\n");
-    printf("6. Display list\n");
-
+    printf("**********************************************\n");
+    printf("*    Welcome to linked list                  *\n");
+    printf("*    1. Push to the list                     *\n");
+    printf("*    2. Pop from the list                    *\n");
+    printf("*    3. Insert at a position                 *\n");
+    printf("*    4. Delete from a position               *\n");
+    printf("*    5. Display list size                    *\n");
+    printf("*    6. Display list                         *\n");
+    printf("*    7. Print list using recursion           *\n");
+    printf("*    8. Reverse print list using recursion   *\n");
+    printf("*    9. Reverse list using recursion         *\n");    
+    printf("*    10.Exit                                 *\n");
+    printf("**********************************************\n");
+    
     int choice;
     printf("Enter your choice: ");
     scanf("%d", &choice);
-
+    struct Node* refHead = head;
+    
     switch(choice){
 
     case 1:
@@ -90,8 +177,55 @@ int main(){
       display();
       break;
 
+    case 3:
+      printf("Enter position to insert at: ");
+      int pos;
+      scanf("\n%d", &pos);
+      //printf("\n");
+      printf("Enter data: ");
+      scanf("%d", &data);
+      printf("\n");
+      insert(data, pos);
+      display();
+      break;
+
+    case 4:
+      if(listSize == 0){
+	printf("The list is empty, deletion not possible\n");
+	break;
+      }
+      printf("Enter the position to delete from: ");
+      scanf("\n%d", &pos);
+      delete(pos);
+      display();
+      break;
+      
+    case 5:
+      size();
+      break;
+
     case 6:
       display();
+      break;
+
+    case 7:
+      forwardPrintWithRecursion(refHead);
+      printf("\n");
+      break;
+
+    case 8:
+      reversePrintWithRecursion(refHead);
+      printf("\n");
+      break;
+
+    case 9:
+      reverseListWithRecursion(refHead);
+      display();
+      break;
+
+    case 10:
+      printf("Bye!\n");
+      exit(0);
       break;
 
     default:
