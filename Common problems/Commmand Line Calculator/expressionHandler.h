@@ -3,6 +3,9 @@
 class Prefix{
 public:
 	char* convertToPrefix(char *);
+	int evalPrefixedExp(char *);
+	int calculateExp(char, char, char);
+
 private:
 	void pushToExpBuffer(char);
 	char prefixBuffer[100];

@@ -12,5 +12,6 @@ int main(){
 	printf("Start doing your calculations\n");
 	cin >> expression;
 	char *prefixExp = prefix.convertToPrefix(expression);
-	printf("%s\n",prefixExp);
+	int finalResult = prefix.evalPrefixedExp(prefixExp);
+	printf("%d\n", finalResult);
 }
