@@ -12,22 +12,32 @@ int main(){
 	while(1){
 		printf("1. Insert an element\n");
 		printf("2. Search for an element\n");
+		printf("3. Show mininum element\n");
+		printf("4. Show maximum element\n");
 
-		printf("\n\nEnter your choice: ");
+		printf("\nEnter your choice: ");
 		cin >> choice;
 
 		switch(choice){
 
 			case 1:
-			printf("\n\nEnter data to be inserted: ");
+			printf("\nEnter data to be inserted: ");
 			cin >> data;
 			bst.insert(data);
 			break;
 
 			case 2:
-			printf("\n\nEnter data to be searched for: ");
+			printf("\nEnter data to be searched for: ");
 			cin >> data;
 			bst.search(data);
+			break;
+
+			case 3:
+			bst.findMin();
+			break;
+
+			case 4:
+			bst.findMax();
 			break;
 
 			default:
