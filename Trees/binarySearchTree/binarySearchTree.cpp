@@ -78,3 +78,12 @@ void BinaryTree::findMin(){
 		return;
 	}
 }
+
+int BinaryTree::findHeight(Node* root){
+	if(root == NULL) return -1;
+	return std::max(findHeight(root->left), findHeight(root->right)) + 1;
+}
+
+Node* BinaryTree::getRoot(){
+	return root;
+}

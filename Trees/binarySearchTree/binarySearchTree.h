@@ -10,8 +10,10 @@ public:
 	void search(int);
 	void findMax();
 	void findMin();
-private:
+	int findHeight(Node*);
+	Node* getRoot();
 	Node* root = NULL;
+//private:
 };
 
 extern BinaryTree bst;

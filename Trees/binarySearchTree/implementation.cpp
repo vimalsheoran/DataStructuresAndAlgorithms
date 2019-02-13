@@ -14,6 +14,7 @@ int main(){
 		printf("2. Search for an element\n");
 		printf("3. Show mininum element\n");
 		printf("4. Show maximum element\n");
+		printf("5. Calculate Height of the tree\n");
 
 		printf("\nEnter your choice: ");
 		cin >> choice;
@@ -38,6 +39,11 @@ int main(){
 
 			case 4:
 			bst.findMax();
+			break;
+
+			case 5:
+			printf("The height of the tree is %d\n",
+				bst.findHeight(bst.root));
 			break;
 
 			default:
