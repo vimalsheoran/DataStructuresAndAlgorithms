@@ -10,18 +10,22 @@ void BinaryTree::insert(int data){
 		Node *newNode = new Node();
 		Node *iter = root;
 		newNode->data = data;
-		while(iter->left != NULL || 
-			iter->right != NULL){
+		while(true){
 			if(newNode->data > iter->data){
-				iter = iter->right;
-			}else if(newNode->data <= iter->data){
-				iter = iter->left;
+				if(iter->right == NULL){
+					iter->right = newNode;
+					return;
+				}else{
+					iter = iter->right;
+				}
+			}else{
+				if(iter->left == NULL){
+					iter->left = newNode;
+					return;
+				}else{
+					iter = iter->left;
+				}
 			}
-		}
-		if(newNode->data > iter->data){
-			iter->right = newNode;
-		}else{
-			iter->left = newNode;
 		}
 	}
 }
@@ -31,9 +35,11 @@ void BinaryTree::search(int data){
 	while(true){
 		if(iter == NULL){
 			printf("No match found!\n");
+			free(iter);
 			return;
 		}else if(data == iter->data){
 			printf("Match found!\n");
+			free(iter);
 			return;
 		}else if(data > iter->data){
 			iter = iter->right;
@@ -41,6 +47,34 @@ void BinaryTree::search(int data){
 			iter = iter->left;
 		}
 	}
-	
 }
 
+void BinaryTree::findMax(){
+	if(root == NULL){
+		printf("The tree is empty\n");
+		return;
+	}else{
+		Node *iter = root;
+		while(iter->right != NULL){
+			iter = iter->right;
+		}
+		printf("The Maximum element in the tree is: %d\n",
+			iter->data);
+		return;
+	}
+}
+
+void BinaryTree::findMin(){
+	if(root == NULL){
+		printf("The tree is empty\n");
+		return;
+	}else{
+		Node *iter = root;
+		while(iter->left != NULL){
+			iter = iter->left;
+		}
+		printf("The Minimum element in the tree is: %d\n",
+			iter->data);
+		return;
+	}
+}
