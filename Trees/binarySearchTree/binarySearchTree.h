@@ -11,6 +11,7 @@ public:
 	void findMax();
 	void findMin();
 	int findHeight(Node*);
+	void levelOrderTraversal(Node *);
 	Node* getRoot();
 	Node* root = NULL;
 //private:

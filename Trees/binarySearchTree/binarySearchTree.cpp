@@ -1,4 +1,5 @@
 #include <iostream>
+#include <queue>
 #include "binarySearchTree.h"
 
 void BinaryTree::insert(int data){
@@ -79,11 +80,32 @@ void BinaryTree::findMin(){
 	}
 }
 
-int BinaryTree::findHeight(Node* root){
+int BinaryTree::findHeight(Node *root){
 	if(root == NULL) return -1;
 	return std::max(findHeight(root->left), findHeight(root->right)) + 1;
 }
 
 Node* BinaryTree::getRoot(){
 	return root;
+}
+
+void BinaryTree::levelOrderTraversal(Node *root){
+	
+	if(root == NULL){
+		printf("The tree is empty\n");
+		return;
+	}
+
+	std::queue <Node*> nodeBuffer;
+	nodeBuffer.push(root);
+
+	while(!nodeBuffer.empty()){
+		Node* current = nodeBuffer.front();
+		printf("%d ", current->data);
+		if(current->left != NULL) nodeBuffer.push(current->left);
+		if(current->right != NULL) nodeBuffer.push(current->right);
+		nodeBuffer.pop();
+	}
+
+	printf("\n"); return;
 }
