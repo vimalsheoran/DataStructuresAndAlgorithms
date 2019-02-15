@@ -16,6 +16,9 @@ int main(){
 		printf("4. Show maximum element\n");
 		printf("5. Calculate Height of the tree\n");
 		printf("6. Perform Level Order Traversal");
+		printf("7. Perform PreOrder Traversal");
+		printf("8. Perform InOrder Traversal");
+		printf("9. Perform PostOrder Traversal");
 
 		printf("\nEnter your choice: ");
 		cin >> choice;
@@ -50,6 +53,18 @@ int main(){
 			case 6:
 			bst.levelOrderTraversal(bst.root);
 			break;
+
+			case 7:
+			bst.preorderTraversal(bst.root);
+			printf("\n"); break;
+
+			case 8:
+			bst.inorderTraversal(bst.root);
+			printf("\n"); break;
+
+			case 9:
+			bst.postorderTraversal(bst.root);
+			printf("\n"); break;
 
 			default:
 			printf("Enter a valid option\n");

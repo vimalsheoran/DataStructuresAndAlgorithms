@@ -109,3 +109,24 @@ void BinaryTree::levelOrderTraversal(Node *root){
 
 	printf("\n"); return;
 }
+
+void BinaryTree::preorderTraversal(Node* root){
+	if(root == NULL) return;
+	printf("%d ", root->data);
+	preorderTraversal(root->left);
+	preorderTraversal(root->right);
+}
+
+void BinaryTree::inorderTraversal(Node* root){
+	if(root == NULL) return;
+	preorderTraversal(root->left);
+	printf("%d ", root->data);
+	preorderTraversal(root->right);
+}
+
+void BinaryTree::postorderTraversal(Node* root){
+	if(root == NULL) return;
+	preorderTraversal(root->left);
+	preorderTraversal(root->right);
+	printf("%d ", root->data);
+}
