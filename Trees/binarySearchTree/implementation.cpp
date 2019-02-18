@@ -8,17 +8,20 @@ BinaryTree bst;
 int main(){
 	
 	int data, choice;
+	bool flag;
 
 	while(1){
-		printf("1. Insert an element\n");
-		printf("2. Search for an element\n");
-		printf("3. Show mininum element\n");
-		printf("4. Show maximum element\n");
-		printf("5. Calculate Height of the tree\n");
-		printf("6. Perform Level Order Traversal");
-		printf("7. Perform PreOrder Traversal");
-		printf("8. Perform InOrder Traversal");
-		printf("9. Perform PostOrder Traversal");
+		printf("1.  Insert an element\n");
+		printf("2.  Search for an element\n");
+		printf("3.  Show mininum element\n");
+		printf("4.  Show maximum element\n");
+		printf("5.  Calculate Height of the tree\n");
+		printf("6.  Perform Level Order Traversal\n");
+		printf("7.  Perform PreOrder Traversal\n");
+		printf("8.  Perform InOrder Traversal\n");
+		printf("9.  Perform PostOrder Traversal\n");
+		printf("10. Check for BST\n");
+		printf("11. Delete Node\n");
 
 		printf("\nEnter your choice: ");
 		cin >> choice;
@@ -65,6 +68,18 @@ int main(){
 			case 9:
 			bst.postorderTraversal(bst.root);
 			printf("\n"); break;
+
+			case 10:
+			flag = bst.checkForBst(bst.root);
+			if(flag) printf("The tree is a binary search tree\n");
+			else printf("The tree is not a binary search tree\n");
+			break;
+
+			case 11:
+			printf("\nEnter data to be deleted: ");
+			cin >> data;
+			bst.deleteNode(bst.root, data);
+			break;
 
 			default:
 			printf("Enter a valid option\n");

@@ -50,6 +50,29 @@ void BinaryTree::search(int data){
 	}
 }
 
+Node* BinaryTree::searchParent(Node *root, int childVal){
+	if(root == NULL) return root;
+	if (root->left->data == childVal ||
+		root->right->data == childVal) return root;
+	if(childVal <= root->data) 
+		searchParent(root->left, childVal);
+	if(childVal > root->data) 
+		searchParent(root->right, childVal);
+}
+
+int BinaryTree::noOfGrandChildren(Node* parent, int childVal){
+	int grandChildren = 0;
+	
+	Node *child = parent->left->data == childVal 
+				? parent->left : parent->right;
+
+	if(child->left != NULL && child->right !=NULL)
+		grandChildren = 2;
+	if(child->left != NULL || child->right != NULL)
+		grandChildren = 1;
+	return grandChildren;
+}
+
 void BinaryTree::findMax(){
 	if(root == NULL){
 		printf("The tree is empty\n");
@@ -79,6 +102,14 @@ void BinaryTree::findMin(){
 		return;
 	}
 }
+
+Node* BinaryTree::getMax(Node *root){
+	if(root->right == NULL)
+		return root;
+	root = root->right;
+	getMax(root);
+}
+
 
 int BinaryTree::findHeight(Node *root){
 	if(root == NULL) return -1;
@@ -129,4 +160,123 @@ void BinaryTree::postorderTraversal(Node* root){
 	preorderTraversal(root->left);
 	preorderTraversal(root->right);
 	printf("%d ", root->data);
+}
+
+bool BinaryTree::checkForBst(Node* root){
+	
+	if(root == NULL) return true;
+	if(root->left == NULL && root->right == NULL) return true;
+
+	if(root->left == NULL){
+		bool check = root->data < root->right->data
+		?true
+		:false;
+
+		return check;
+
+	}else if(root->right == NULL){
+		bool check = root->data >= root->left->data
+		?true
+		:false;
+
+		return check;
+	}
+
+	if( root->data >= root->left->data &&
+		root->data < root->right->data){ 
+		return true;
+	}else{return false;}
+
+	checkForBst(root->left);
+	checkForBst(root->right);
+}
+
+void BinaryTree::deleteNode(Node* root, int valToDelete){
+
+	if(root == NULL){
+		printf("No node found to delete\n");
+		return;
+	}
+
+	if(valToDelete < root->data){
+		deleteNode(root->left, valToDelete);
+	}else if(valToDelete > root->data){
+		deleteNode(root->right, valToDelete);
+	}
+
+	if(root->data == valToDelete){
+		if( root->left == NULL &&
+			root->right == NULL){
+			Node* parent = searchParent(root, root->data);
+			if(parent->left == root) 
+				parent->left = NULL;
+			if(parent->right == root)
+				parent->right = NULL;
+			delete root;
+		}else if(root->left == NULL){
+			Node* temp = root;
+			root = root->right;
+			delete temp;
+		}else if(root->right == NULL){
+			Node* temp = root;
+			root = root->left;
+			delete temp;
+		}else{
+			Node *maxLeftSubTree = getMax(root);
+			int tempData = maxLeftSubTree->data;
+			Node* parentMax = searchParent(root, tempData);
+			deleteNode(root, maxLeftSubTree->data);
+			parentMax->right = NULL;
+			root->data = tempData;
+		}
+	}
+
+	return;
+	
+	// Node *parentNode = searchParent(root, valToDelete);
+	// Node *child;
+	// Node *grandChild;
+
+	// if(parentNode == NULL){
+	// 	printf("The tree is empty, nothing to delete\n");
+	// 	return;
+	// }
+
+	// int grandChildren = noOfGrandChildren(parentNode, valToDelete);
+
+	// if(valToDelete == parentNode->left->data)
+	// 		child = parentNode->left;
+	// if(valToDelete == parentNode->right->data)
+	// 		child = parentNode->right;
+
+	// if(grandChildren == 0){
+	// 	free(child);
+	// 	if(parentNode->left == 0)
+	// 		parentNode->left = NULL;
+	// 	if(parentNode->right == 0)
+	// 		parentNode->right = NULL;
+	// }
+
+	// if(grandChildren == 1){
+
+	// 	if(child->left != NULL) grandChild = child->left;
+	// 	if(child->right != NULL) grandChild = child->right;
+
+	// 	if(parentNode->left == child){
+	// 		parentNode->left = grandChild;
+	// 		free(child);
+	// 	}
+
+	// 	if(parentNode->right == child){
+	// 		parentNode->right = grandChild;
+	// 		free(child);
+	// 	}
+	// }
+
+	// if(grandChildren == 2){
+	// 	Node *maxLeftSubTree = getMax(child);
+	// 	int tempData = maxLeftSubTree->data;
+	// 	deleteNode(maxLeftSubTree->data);	
+	// 	child->data = tempData;
+	// }
 }

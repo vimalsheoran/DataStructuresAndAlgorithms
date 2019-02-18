@@ -13,9 +13,16 @@ public:
 	int findHeight(Node*);
 	void levelOrderTraversal(Node *);
 	void preorderTraversal(Node *);
+	void inorderTraversal(Node *);
+	void postorderTraversal(Node *);
+	void deleteNode(Node*, int);
+	bool checkForBst(Node *);
 	Node* getRoot();
 	Node* root = NULL;
-//private:
+private:
+	Node* getMax(Node*);
+	int noOfGrandChildren(Node*, int);
+	Node* searchParent(Node*, int);
 };
 
 extern BinaryTree bst;
