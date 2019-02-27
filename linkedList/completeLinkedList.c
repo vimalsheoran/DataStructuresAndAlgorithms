@@ -123,6 +123,18 @@ void reverseListWithRecursion(struct Node* current){
   current->next = NULL;
 }
 
+void delete_list(struct Node* head){
+  
+  while(head->next != NULL){
+    struct Node *temp = head;
+    head = head->next;
+    free(temp);
+  }
+
+  free(head);
+  return;
+}
+
 void display(){
   struct Node* temp = head;
   if(listSize == -1 || head == NULL){
@@ -139,6 +151,15 @@ void size(){
   printf("Size of the list is: %d\n", listSize);
 }
 
+int is_empty(){
+  if(head == NULL || 
+    listSize == 0){
+    printf("The list is empty\n");
+    return 0;
+  }
+  return 1;
+}
+
 int main(){
    head = NULL;
    while(1){
@@ -153,8 +174,9 @@ int main(){
     printf("*    6. Display list                         *\n");
     printf("*    7. Print list using recursion           *\n");
     printf("*    8. Reverse print list using recursion   *\n");
-    printf("*    9. Reverse list using recursion         *\n");    
-    printf("*    10.Exit                                 *\n");
+    printf("*    9. Reverse list using recursion         *\n");
+    printf("*    10.!!! DELETE LIST !!!                  *\n");    
+    printf("*    11.Exit                                 *\n");
     printf("**********************************************\n");
     
     int choice;
@@ -191,8 +213,8 @@ int main(){
 
     case 4:
       if(listSize == 0){
-	printf("The list is empty, deletion not possible\n");
-	break;
+      	printf("The list is empty, deletion not possible\n");
+      	break;
       }
       printf("Enter the position to delete from: ");
       scanf("\n%d", &pos);
@@ -209,21 +231,33 @@ int main(){
       break;
 
     case 7:
+      if(is_empty() == 0)
+        break;
       forwardPrintWithRecursion(refHead);
       printf("\n");
       break;
 
     case 8:
+      if(is_empty() == 0)
+        break;
       reversePrintWithRecursion(refHead);
       printf("\n");
       break;
 
     case 9:
+      if(is_empty() == 0)
+        break;
       reverseListWithRecursion(refHead);
       display();
       break;
 
     case 10:
+      delete_list(refHead);
+      printf("Deleted the list!\n");
+      head = NULL; listSize = 0;
+      break;
+
+    case 11:
       printf("Bye!\n");
       exit(0);
       break;
