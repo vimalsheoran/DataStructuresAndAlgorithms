@@ -73,4 +73,13 @@ void CLL::insert_head(int data){
 	return;
 }
 
-
+void CLL::delete_head(){
+	if(head == NULL){
+		pop();
+		return;
+	}
+	Node *ref_head = head;
+	head = head->next;
+	free(ref_head);
+	return;
+}

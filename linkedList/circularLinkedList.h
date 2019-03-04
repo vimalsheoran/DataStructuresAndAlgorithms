@@ -13,8 +13,9 @@ public:
 	void push(int);
 	void pop();
 	void insert_head(int);
-	Node* head = NULL;
+	void delete_head();
 private:
+	Node* head = NULL;
 	int list_length = 0;
 };
 
