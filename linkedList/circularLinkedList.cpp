@@ -45,6 +45,21 @@ void CLL::push(int data){
 	return;
 }
 
+void CLL::pop(){
+	if(head == NULL){
+		printf("The list is empty nothing to delete.\n");
+		return;
+	}
+	Node* current = head;
+	while(current->next->next != head){
+		current = current->next;
+	}
+	Node *to_delete = current->next;
+	current->next = head;
+	free(to_delete);
+	return;
+}
+
 void CLL::insert_head(int data){
 	if(head == NULL){
 		push(data);
@@ -57,3 +72,5 @@ void CLL::insert_head(int data){
 	head = new_node;
 	return;
 }
+
+

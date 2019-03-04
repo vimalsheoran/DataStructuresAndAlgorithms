@@ -11,6 +11,7 @@ public:
 	int no_of_nodes();
 	void print_list();
 	void push(int);
+	void pop();
 	void insert_head(int);
 	Node* head = NULL;
 private:
