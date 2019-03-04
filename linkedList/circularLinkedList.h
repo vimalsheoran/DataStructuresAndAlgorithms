@@ -10,8 +10,9 @@ class CLL{
 public:
 	int no_of_nodes(Node*);
 	void print_list(Node*);
-private:
+	void push(Node*, int);
 	Node* root = NULL;
+private:
 	int list_length = 0;
 };
 

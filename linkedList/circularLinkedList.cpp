@@ -26,3 +26,21 @@ void CLL::print_list(Node* head){
 	}while(current != head);
 	printf("\n"); return;
 }
+
+void CLL::push(Node* head, int data){
+	Node* newNode = new Node();
+	newNode->data = data;
+	newNode->next = NULL;
+	if(head == NULL){
+		newNode->next = head;
+		head = newNode;
+		return;
+	}
+	Node *current = head;
+	while(current->next != head){
+		current = current->next;
+	}
+	current->next = newNode;
+	newNode->next = head;
+	return;
+}
