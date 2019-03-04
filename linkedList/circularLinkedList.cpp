@@ -1,6 +1,6 @@
 #include "circularLinkedList.h"
 
-int CLL::no_of_nodes(Node *head){
+int CLL::no_of_nodes(){
 	
 	if(head == NULL){
 		return 0;
@@ -14,7 +14,7 @@ int CLL::no_of_nodes(Node *head){
 	return count;
 }
 
-void CLL::print_list(Node* head){
+void CLL::print_list(){
 	if(head == NULL){
 		printf("The list is empty.\n");
 		return;
@@ -27,20 +27,33 @@ void CLL::print_list(Node* head){
 	printf("\n"); return;
 }
 
-void CLL::push(Node* head, int data){
-	Node* newNode = new Node();
-	newNode->data = data;
-	newNode->next = NULL;
+void CLL::push(int data){
+	Node* new_node = new Node();
+	new_node->data = data;
+	new_node->next = NULL;
 	if(head == NULL){
-		newNode->next = head;
-		head = newNode;
+		new_node->next = head;
+		head = new_node;
 		return;
 	}
 	Node *current = head;
 	while(current->next != head){
 		current = current->next;
 	}
-	current->next = newNode;
-	newNode->next = head;
+	current->next = new_node;
+	new_node->next = head;
+	return;
+}
+
+void CLL::insert_head(int data){
+	if(head == NULL){
+		push(data);
+		return;
+	}
+	Node* new_node = new Node();
+	new_node->data = data;
+
+	new_node->next = head->next;
+	head = new_node;
 	return;
 }
