@@ -10,6 +10,7 @@ class LinkedList{
 public:
 	void push(int);
 	void print_list();
+	void cyclic_list(int);
 	Node* head = NULL;
 };
 

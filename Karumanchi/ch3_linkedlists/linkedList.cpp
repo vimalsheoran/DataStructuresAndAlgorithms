@@ -18,6 +18,34 @@ void LinkedList::push(int data){
 	return;
 }
 
+void LinkedList::cyclic_list(int size){
+	Node *cycle_point;
+	Node *prev_node = head;
+	for(int i = 0; i < size-1; i++){
+		Node *new_node = new Node();
+		new_node->data = i;
+		new_node->next = NULL;
+
+		if(head == NULL){
+			head = new_node;
+			prev_node = new_node;
+		}else{
+			Node *temp = prev_node;
+			temp->next = new_node;
+			prev_node = new_node;
+		}
+
+		if(i == (size/2)){
+			cycle_point = new_node;
+		}
+	}
+
+	Node *last_node = new Node();
+	last_node->data = size-1;
+	last_node->next = cycle_point;
+	return;
+}
+
 void LinkedList::print_list(){
 	if(head == NULL){
 		printf("The list is empty\n");
