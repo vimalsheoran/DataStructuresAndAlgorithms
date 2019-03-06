@@ -5,7 +5,7 @@ using namespace std;
 
 LinkedList ll;
 
-void find_cycle(){
+int find_loop(){
 	Node *slow_ptr, *fast_ptr;
 	slow_ptr = fast_ptr = ll.head;
 
@@ -21,11 +21,11 @@ void find_cycle(){
 		}
 		if(fast_ptr == slow_ptr){
 			printf("Cycle detected!\n");
-			return;
+			return fast_ptr->data;
 		}
 		if(fast_ptr == NULL){
 			printf("Non cyclic list!\n");
-			return;
+			return 0;
 		}
 	}
 
@@ -36,5 +36,6 @@ int main(){
 	ll.cyclic_list();
 	printf("List generated.\n");
 	printf("Detecting cycle....\n");
-	find_cycle();
+	int node = find_loop();
+	printf("The cycle occurs at Node: %d\n", node);
 }

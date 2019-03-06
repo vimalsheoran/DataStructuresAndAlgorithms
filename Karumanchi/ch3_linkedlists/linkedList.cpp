@@ -18,10 +18,10 @@ void LinkedList::push(int data){
 	return;
 }
 
-void LinkedList::cyclic_list(int size){
+void LinkedList::cyclic_list(){
 	Node *cycle_point;
 	Node *prev_node = head;
-	for(int i = 0; i < size-1; i++){
+	for(int i = 0; i < 9; i++){
 		Node *new_node = new Node();
 		new_node->data = i;
 		new_node->next = NULL;
@@ -35,13 +35,14 @@ void LinkedList::cyclic_list(int size){
 			prev_node = new_node;
 		}
 
-		if(i == (size/2)){
+		if(i == 5){
 			cycle_point = new_node;
 		}
 	}
 
 	Node *last_node = new Node();
-	last_node->data = size-1;
+	last_node->data = 9;
+	prev_node->next = last_node;
 	last_node->next = cycle_point;
 	return;
 }
