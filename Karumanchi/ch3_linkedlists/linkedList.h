@@ -10,8 +10,13 @@ class LinkedList{
 public:
 	void push(int);
 	void print_list();
+	void insert_head(int);
+	void insert_middle(int, Node*);
+	void insert_end(int, Node*);
 	void cyclic_list();
 	Node* head = NULL;
+private:
+	void set_head(int);
 };
 
 extern LinkedList ll;

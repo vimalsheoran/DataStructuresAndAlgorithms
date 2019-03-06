@@ -61,3 +61,48 @@ void LinkedList::print_list(){
 	printf("\n");
 	return;
 }
+
+void LinkedList::insert_head(int data){
+	if(head == NULL){
+		set_head(data);
+		return;
+	}
+	Node *new_node = new Node();
+	new_node->data = data;
+	new_node->next = head;
+	head = new_node;
+	return;
+}
+
+void LinkedList::insert_middle(int data, Node *prev_node){
+	if(head == NULL){
+		set_head(data);
+		return;
+	}
+	Node *new_node = new Node();
+	new_node->data = data;
+	printf("This is the prev node data: %d\n", prev_node->data);
+	new_node->next = prev_node->next;
+	prev_node->next = new_node;
+	return;
+}
+
+void LinkedList::insert_end(int data, Node *prev_node){
+	if(head == NULL){
+		set_head(data);
+		return;
+	}
+	Node *new_node = new Node();
+	new_node->data = data;
+	new_node->next = NULL;
+	prev_node->next = new_node;
+	return;
+}
+
+void LinkedList::set_head(int data){
+	Node *new_node = new Node();
+	new_node->data = data;
+	new_node->next = NULL;
+	head = new_node;
+	return;
+}
