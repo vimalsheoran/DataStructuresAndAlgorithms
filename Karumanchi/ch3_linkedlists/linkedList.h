@@ -14,6 +14,7 @@ public:
 	void insert_middle(int, Node*);
 	void insert_end(int, Node*);
 	void cyclic_list();
+	void generate_list();
 	Node* head = NULL;
 private:
 	void set_head(int);

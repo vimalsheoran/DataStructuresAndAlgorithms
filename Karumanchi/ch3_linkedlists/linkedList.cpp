@@ -106,3 +106,20 @@ void LinkedList::set_head(int data){
 	head = new_node;
 	return;
 }
+
+void LinkedList::generate_list(){
+	Node *prev_node;
+	for(int i = 0; i < 10; i++){
+		Node *new_node = new Node();
+		new_node->data = i;
+		new_node->next = NULL;
+		if(head == NULL){
+			head = new_node;
+			prev_node = new_node;
+		}else{
+			prev_node->next = new_node;
+			prev_node = new_node;
+		}
+	}
+	return;
+}
