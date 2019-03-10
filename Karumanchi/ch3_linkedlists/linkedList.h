@@ -15,6 +15,7 @@ public:
 	void insert_end(int, Node*);
 	void cyclic_list();
 	void generate_list();
+	void generate_list_rand_vals();
 	Node* head = NULL;
 private:
 	void set_head(int);
