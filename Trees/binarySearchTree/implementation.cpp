@@ -22,6 +22,7 @@ int main(){
 		printf("9.  Perform PostOrder Traversal\n");
 		printf("10. Check for BST\n");
 		printf("11. Delete Node\n");
+		printf("12. Delete Tree\n");
 
 		printf("\nEnter your choice: ");
 		cin >> choice;
@@ -79,6 +80,14 @@ int main(){
 			printf("\nEnter data to be deleted: ");
 			cin >> data;
 			bst.deleteNode(bst.root, data);
+			break;
+
+			case 12:
+			if(bst.root == NULL){
+				printf("\nThe tree is already empty, nothing to delete");
+				break;
+			}
+			bst.deleteTree(bst.root);
 			break;
 
 			default:

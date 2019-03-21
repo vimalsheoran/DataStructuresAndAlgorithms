@@ -16,6 +16,7 @@ public:
 	void inorderTraversal(Node *);
 	void postorderTraversal(Node *);
 	void deleteNode(Node*, int);
+	void deleteTree(Node *);
 	bool checkForBst(Node *);
 	Node* getRoot();
 	Node* root = NULL;

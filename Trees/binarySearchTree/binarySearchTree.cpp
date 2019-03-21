@@ -280,3 +280,14 @@ void BinaryTree::deleteNode(Node* root, int valToDelete){
 	// 	child->data = tempData;
 	// }
 }
+
+void deleteTree(Node *root){
+	if(root == NULL){
+		return;
+	}else{
+		deleteTree(root->left);
+		deleteTree(root->right);
+		free(root);
+		return;
+	}
+}
