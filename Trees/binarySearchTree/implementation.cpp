@@ -26,8 +26,7 @@ int main(){
 		printf("13. No of leaves\n");
 		printf("14. Calculate diameter of the tree\n");
 		printf("15. Display all paths\n");
-
-
+		printf("16. Get sum of all elements\n");
 
 		printf("\nEnter your choice: ");
 		cin >> choice;
@@ -115,6 +114,11 @@ int main(){
 			}
 			int *pathArr;
 			bst.dispAllPaths(bst.root, pathArr, 0);
+			break;
+
+			case 16:
+			data = bst.getSum(bst.root);
+			printf("Sum of all elements: %d\n", data);
 			break;
 
 			default:

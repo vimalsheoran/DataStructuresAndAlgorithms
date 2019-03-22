@@ -24,6 +24,7 @@ public:
 	void dispAllPaths(Node *, int*, int);
 	bool checkForBst(Node *);
 	Node* getRoot();
+	int getSum(Node *);
 	Node* root = NULL;
 private:
 	Node* getMax(Node*);

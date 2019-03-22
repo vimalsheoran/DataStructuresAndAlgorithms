@@ -353,3 +353,11 @@ void BinaryTree::printArray(int *array, int arrLen){
 	}
 	printf("\n");
 }
+
+int BinaryTree::getSum(Node *){
+	if(root == NULL)
+		return 0;
+	return(root->data +
+		getSum(root->left) +
+		getSum(root->right));
+}
