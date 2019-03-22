@@ -281,7 +281,7 @@ void BinaryTree::deleteNode(Node* root, int valToDelete){
 	// }
 }
 
-void deleteTree(Node *root){
+void BinaryTree::deleteTree(Node *root){
 	if(root == NULL){
 		return;
 	}else{
@@ -290,4 +290,25 @@ void deleteTree(Node *root){
 		free(root);
 		return;
 	}
+}
+
+int BinaryTree::noOfLeaves(Node *root){
+	if(root == NULL)
+		return 0;
+	
+	int leafCount = 0;
+	std::queue <Node*> nodeBuffer;
+	nodeBuffer.push(root);
+
+	while(!nodeBuffer.empty()){
+		Node* current = nodeBuffer.front();
+		if (current->left == NULL &&
+			current->right == NULL)
+			leafCount++;
+		if(current->left != NULL) nodeBuffer.push(current->left);
+		if(current->right != NULL) nodeBuffer.push(current->right);
+		nodeBuffer.pop();
+	}
+
+	return leafCount;
 }

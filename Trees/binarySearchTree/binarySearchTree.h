@@ -1,3 +1,5 @@
+#include <cstdlib>
+
 struct Node{
 	int data;
 	Node* left; 
@@ -17,6 +19,7 @@ public:
 	void postorderTraversal(Node *);
 	void deleteNode(Node*, int);
 	void deleteTree(Node *);
+	int noOfLeaves(Node *);
 	bool checkForBst(Node *);
 	Node* getRoot();
 	Node* root = NULL;

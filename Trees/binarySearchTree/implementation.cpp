@@ -23,6 +23,8 @@ int main(){
 		printf("10. Check for BST\n");
 		printf("11. Delete Node\n");
 		printf("12. Delete Tree\n");
+		printf("13. No of leaves\n");
+
 
 		printf("\nEnter your choice: ");
 		cin >> choice;
@@ -88,6 +90,12 @@ int main(){
 				break;
 			}
 			bst.deleteTree(bst.root);
+			break;
+
+			case 13:
+			data = bst.noOfLeaves(
+				bst.root);
+			printf("No of leaves is: %d\n", data);
 			break;
 
 			default:
