@@ -375,6 +375,20 @@ Node* BinaryTree::leastCommonAncestor(Node *root, int a, int b){
 	if(left && right){
 		return root; 
 	}else{
-		return (left?left:right);0
+		return (left?left:right);
 	}
+}
+
+bool BinaryTree::allAncestors(Node *root, int queryVal){
+
+	if(root == NULL)
+		return false;
+	if (root->left->data == queryVal ||
+		root->right->data == queryVal ||
+		allAncestors(root->left, queryVal) ||
+		allAncestors(root->right, queryVal)){
+		printf("%d ", root->data);
+		return true;
+	}
+	return false;
 }

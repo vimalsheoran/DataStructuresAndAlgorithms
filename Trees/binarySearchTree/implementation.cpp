@@ -9,6 +9,7 @@ int main(){
 	
 	int data, choice;
 	bool flag;
+	Node *ancestor;
 
 	while(1){
 		printf("1.  Insert an element\n");
@@ -28,7 +29,7 @@ int main(){
 		printf("15. Display all paths\n");
 		printf("16. Get sum of all elements\n");
 		printf("17. Find common ancestor\n");
-
+		printf("18. Find all ancestors\n");
 
 		printf("\nEnter your choice: ");
 		cin >> choice;
@@ -127,9 +128,17 @@ int main(){
 			printf("Enter the two numbers\n");
 			int a, b;
 			cin >> a >> b;
-			Node *ancestor = bst.leastCommonAncestor(
+			ancestor = bst.leastCommonAncestor(
 				bst.root, a, b);
 			printf("The ancestor is: %d\n", ancestor->data);
+			break;
+
+			case 18:
+			printf("Enter the value for finding ancestors\n");
+			cin >> data;
+			bst.allAncestors(
+				bst.root,
+				data);
 			break;
 
 			default:
