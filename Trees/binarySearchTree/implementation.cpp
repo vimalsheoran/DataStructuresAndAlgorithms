@@ -24,6 +24,7 @@ int main(){
 		printf("11. Delete Node\n");
 		printf("12. Delete Tree\n");
 		printf("13. No of leaves\n");
+		printf("14. Calculate diameter of the tree\n");
 
 
 		printf("\nEnter your choice: ");
@@ -96,6 +97,13 @@ int main(){
 			data = bst.noOfLeaves(
 				bst.root);
 			printf("No of leaves is: %d\n", data);
+			break;
+
+			case 14:
+			data = bst.diameter(
+				bst.root);
+			printf("The diameter of the tree is: %d\n",
+				data);
 			break;
 
 			default:

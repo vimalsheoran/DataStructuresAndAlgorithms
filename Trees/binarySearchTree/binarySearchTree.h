@@ -20,6 +20,7 @@ public:
 	void deleteNode(Node*, int);
 	void deleteTree(Node *);
 	int noOfLeaves(Node *);
+	int diameter(Node *);
 	bool checkForBst(Node *);
 	Node* getRoot();
 	Node* root = NULL;

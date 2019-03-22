@@ -312,3 +312,21 @@ int BinaryTree::noOfLeaves(Node *root){
 
 	return leafCount;
 }
+
+int BinaryTree::diameter(Node *root){
+	if(root == NULL)
+		return 0;
+	
+	// Finding the size of the root chord
+	int rootChord = findHeight(root->left)+
+		findHeight(root->right)+
+		1;
+
+	// Finding the size of the left sub tree chord
+	int lstChord = diameter(root->left);
+	int rstChord = diameter(root->right);
+
+	return std::max(
+		rootChord, 
+		std::max(lstChord, rstChord));
+}
