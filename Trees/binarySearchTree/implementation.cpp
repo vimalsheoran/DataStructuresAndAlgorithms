@@ -27,6 +27,8 @@ int main(){
 		printf("14. Calculate diameter of the tree\n");
 		printf("15. Display all paths\n");
 		printf("16. Get sum of all elements\n");
+		printf("17. Find common ancestor\n");
+
 
 		printf("\nEnter your choice: ");
 		cin >> choice;
@@ -119,6 +121,15 @@ int main(){
 			case 16:
 			data = bst.getSum(bst.root);
 			printf("Sum of all elements: %d\n", data);
+			break;
+
+			case 17:
+			printf("Enter the two numbers\n");
+			int a, b;
+			cin >> a >> b;
+			Node *ancestor = bst.leastCommonAncestor(
+				bst.root, a, b);
+			printf("The ancestor is: %d\n", ancestor->data);
 			break;
 
 			default:

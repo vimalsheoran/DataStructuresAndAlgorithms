@@ -361,3 +361,20 @@ int BinaryTree::getSum(Node *){
 		getSum(root->left) +
 		getSum(root->right));
 }
+
+Node* BinaryTree::leastCommonAncestor(Node *root, int a, int b){
+	if(root == NULL)
+		return root;
+	if (root->data == a || 
+		root->data == b){
+		return root;
+	}
+	Node *left = leastCommonAncestor(root->left, a, b);
+	Node *right = leastCommonAncestor(root->right, a, b);
+
+	if(left && right){
+		return root; 
+	}else{
+		return (left?left:right);0
+	}
+}

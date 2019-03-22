@@ -25,6 +25,7 @@ public:
 	bool checkForBst(Node *);
 	Node* getRoot();
 	int getSum(Node *);
+	Node* leastCommonAncestor(Node*, int, int);
 	Node* root = NULL;
 private:
 	Node* getMax(Node*);
