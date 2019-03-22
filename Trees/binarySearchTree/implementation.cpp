@@ -25,6 +25,8 @@ int main(){
 		printf("12. Delete Tree\n");
 		printf("13. No of leaves\n");
 		printf("14. Calculate diameter of the tree\n");
+		printf("15. Display all paths\n");
+
 
 
 		printf("\nEnter your choice: ");
@@ -104,6 +106,15 @@ int main(){
 				bst.root);
 			printf("The diameter of the tree is: %d\n",
 				data);
+			break;
+
+			case 15:
+			if(bst.root == NULL){
+				printf("The tree is empty\n");
+				break;
+			}
+			int *pathArr;
+			bst.dispAllPaths(bst.root, pathArr, 0);
 			break;
 
 			default:

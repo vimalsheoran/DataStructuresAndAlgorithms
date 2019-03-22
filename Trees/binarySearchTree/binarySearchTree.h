@@ -21,6 +21,7 @@ public:
 	void deleteTree(Node *);
 	int noOfLeaves(Node *);
 	int diameter(Node *);
+	void dispAllPaths(Node *, int*, int);
 	bool checkForBst(Node *);
 	Node* getRoot();
 	Node* root = NULL;
@@ -28,6 +29,7 @@ private:
 	Node* getMax(Node*);
 	int noOfGrandChildren(Node*, int);
 	Node* searchParent(Node*, int);
+	void printArray(int*, int);
 };
 
 extern BinaryTree bst;

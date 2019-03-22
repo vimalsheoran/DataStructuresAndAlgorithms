@@ -330,3 +330,26 @@ int BinaryTree::diameter(Node *root){
 		rootChord, 
 		std::max(lstChord, rstChord));
 }
+
+void BinaryTree::dispAllPaths(Node *root, int *pathArr, int pathLen){
+	if(root == NULL)
+		return;
+	pathArr[pathLen] = root->data;
+	pathLen++;
+	if (root->left == NULL &&
+		root->right == NULL){
+		printArray(pathArr, pathLen);
+	}else{
+		if(root->left != NULL)
+			dispAllPaths(root->left, pathArr, pathLen);
+		if(root->right != NULL)
+			dispAllPaths(root->right, pathArr, pathLen);
+	}
+}
+
+void BinaryTree::printArray(int *array, int arrLen){
+	for(int i = 0; i < arrLen; i++){
+		printf("%d ", array[i]);
+	}
+	printf("\n");
+}
