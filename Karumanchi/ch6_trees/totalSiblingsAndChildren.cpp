@@ -23,3 +23,11 @@ int no_of_siblings(Node *node){
 	}
 	return count;
 }
+
+int no_children(Node *node){
+	if(node->first_child == NULL)
+		return 0;
+	int total_children = no_of_siblings(
+		node->first_child) + 1;
+	return total_children;
+}
