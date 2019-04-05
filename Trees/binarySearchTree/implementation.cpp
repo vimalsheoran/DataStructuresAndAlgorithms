@@ -30,6 +30,8 @@ int main(){
 		printf("16. Get sum of all elements\n");
 		printf("17. Find common ancestor\n");
 		printf("18. Find all ancestors\n");
+		printf("19. Insert as AVL\n");
+		printf("20. Traverse AVL Inorder\n");
 
 		printf("\nEnter your choice: ");
 		cin >> choice;
@@ -139,6 +141,16 @@ int main(){
 			bst.allAncestors(
 				bst.root,
 				data);
+			break;
+
+			case 19:
+			printf("Enter the value you want to insert: ");
+			cin >> data;
+			bst.avlInsert(bst.avlRoot, data);
+			break;
+
+			case 20:
+			bst.inorderAvlTraversal(bst.avlRoot);
 			break;
 
 			default:

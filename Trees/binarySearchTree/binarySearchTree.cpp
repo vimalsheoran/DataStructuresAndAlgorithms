@@ -2,6 +2,8 @@
 #include <queue>
 #include "binarySearchTree.h"
 
+using namespace std;
+
 void BinaryTree::insert(int data){
 	if(root == NULL){
 		root = new Node();
@@ -28,6 +30,43 @@ void BinaryTree::insert(int data){
 				}
 			}
 		}
+	}
+}
+
+AvlNode* BinaryTree::avlInsert(AvlNode *root, int data){
+	if(root == NULL){
+		root = new AvlNode();
+		root->data = data;
+		root->right = NULL;
+		root->left = NULL;
+		root->height = 0;
+		return root;
+	} else if (root->data > data) {
+		root->left = avlInsert(root->left, data);
+		if(root->left->height - root->right->height == 2){
+			if(data < root->left->data){
+				root = singleRotateLeft(root);
+				return root;
+			} else {
+				root = doubleRotateLeft(root);
+				return root;
+			}
+		}
+	} else if (root->data < data){
+		root->right = avlInsert(root->right, data);
+		if(root->left->height - root->right->height == 2){
+			if(data > root->right->data){
+				root = singleRotateRight(root);
+				return root;
+			} else {
+				root = doubleRotateRight(root);
+				return root;
+			}
+		}
+	
+	} else {
+		root->height = max(root->left->height, root->right->height) + 1;
+		return root;
 	}
 }
 
@@ -391,4 +430,40 @@ bool BinaryTree::allAncestors(Node *root, int queryVal){
 		return true;
 	}
 	return false;
+}
+
+AvlNode* BinaryTree::singleRotateLeft(AvlNode *root){
+	AvlNode *child = root->left;
+	root->right = child->left;
+	child->right = root->left;
+	child->height = max(child->left->height, root->height) + 1;
+	root->height = max(root->left->height, root->right->height) + 1;
+	return child;
+}
+
+AvlNode* BinaryTree::singleRotateRight(AvlNode *root){
+	AvlNode *child = root->right;
+	root->right = child->left;
+	child->left = root;
+	root->height = max(root->left->height, root->right->height) + 1;
+	child->height = max(root->height, child->right->height) + 1;
+	return child;
+}
+
+AvlNode* BinaryTree::doubleRotateLeft(AvlNode *root){
+	root->left = singleRotateRight(root->left);
+	return singleRotateLeft(root);
+}
+
+AvlNode* BinaryTree::doubleRotateRight(AvlNode *root){
+	root->right = singleRotateLeft(root->right);
+	return singleRotateRight(root);
+}
+
+void BinaryTree::inorderAvlTraversal(AvlNode* root){
+	if(root == NULL)
+		return;
+	inorderAvlTraversal(root->left);
+	printf("%d ", root->data);
+	inorderAvlTraversal(root->right);
 }
