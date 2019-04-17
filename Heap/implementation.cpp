@@ -19,7 +19,19 @@ int main(){
 			printf("Enter the element you want to insert to your heap ");
 			cin >> data;
 			heap.push(data);
-			// heap.print_heap();
+			heap.print_heap();
+			break;
+
+			case 2:
+			heap.pop();
+			heap.print_heap();
+			break;
+
+			case 7:
+			heap.push(8);
+			heap.push(6);
+			heap.push(7);
+			heap.push(5);
 			break;
 
 			case 8:

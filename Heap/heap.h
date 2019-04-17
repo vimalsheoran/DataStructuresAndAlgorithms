@@ -14,6 +14,7 @@ public:
 	int size();
 private:
 	int insertion_swap(vector <int> &, int);
+	int deletion_swap(vector <int> &, int, int);
 };
 
 extern Heap heap;
