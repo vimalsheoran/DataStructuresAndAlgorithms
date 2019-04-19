@@ -101,3 +101,22 @@ void Heap::sort(){
 	} printf("\n");
 	return;
 }
+
+vector <int> Heap::heapify(Node *root){
+	if(!root){
+		printf("No reference provided to the tree.");
+		return;
+	}
+	vector <int> non_heapified;
+	queue <int> level_order_q;
+	level_order_q.push(root);
+	while(!level_order_q.empty()){
+		Node *top = level_order_q.front();
+		if(top->left_child)
+			level_order_q.push(top->left);
+		if(top->right_child)
+			level_order_q.push(top->right);
+		heap_ref.push_back(top->data);
+		level_order_q.pop();
+	}
+}
