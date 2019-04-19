@@ -27,6 +27,10 @@ int main(){
 			heap.print_heap();
 			break;
 
+			case 3:
+			heap.sort();
+			break;
+
 			case 7:
 			heap.push(8);
 			heap.push(6);

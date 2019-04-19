@@ -15,24 +15,26 @@ void Heap::push(int data){
 	return;
 }
 
-void Heap::pop(){
+int Heap::pop(){
+	int head;
 	if(heap_ref.empty()){
 		printf("The heap is empty, nothing to remove.\n");
-		return;
+		return 0;
 	} else if(heap_ref.size() == 1){
+		head = heap_ref[0];
 		heap_ref.clear();
-		return;
+		return head;
 	} else {
 		int curr_size = heap_ref.size();
+		head = heap_ref[0];
 		heap_ref[0] = heap_ref[curr_size - 1];
 		heap_ref.pop_back();
 		curr_size = heap_ref.size();
-		print_heap();
 		int i = 0;
 		while(i < curr_size && i != -1){
 			i = deletion_swap(heap_ref, i, curr_size);
-		} 
-
+		}
+		return head;
 	}
 }
 
@@ -82,4 +84,20 @@ int Heap::deletion_swap(vector <int> &heap_ref, int i, int curr_size){
 	} else {
 		return -1;
 	}
+}
+
+void Heap::sort(){
+	int curr_size = heap_ref.size();
+	int last_index = curr_size-1;
+	int top;
+	vector <int> sorted_heap; 
+	for(int i = 0; i < curr_size; i++){
+		top = pop();
+		sorted_heap.push_back(top);
+		last_index--;
+	}
+	for(int i = 0; i < curr_size; i++){
+		printf("%d ", sorted_heap[i]);
+	} printf("\n");
+	return;
 }

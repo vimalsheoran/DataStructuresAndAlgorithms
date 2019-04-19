@@ -7,7 +7,7 @@ class Heap{
 public:
 	vector <int> heap_ref;
 	int heap_capacity;
-	void pop();
+	int pop();
 	void push(int);
 	void sort();
 	void print_heap();
