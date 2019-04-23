@@ -6,9 +6,9 @@ using namespace std;
 
 struct Node{
 	int data;
-	Node* left_child;
-	Node* right_child;
-}
+	Node* left;
+	Node* right;
+};
 
 class Heap{
 public:
@@ -17,9 +17,10 @@ public:
 	int pop();
 	void push(int);
 	void sort();
-	void print_heap(Node*);
+	void print_heap();
 	int size();
-	vector <int> heapify()
+	vector <int> heapify(Node*);
+	int find_max_in_min_heap(); // Also min in max heap
 private:
 	int insertion_swap(vector <int> &, int);
 	int deletion_swap(vector <int> &, int, int);

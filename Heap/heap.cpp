@@ -103,20 +103,39 @@ void Heap::sort(){
 }
 
 vector <int> Heap::heapify(Node *root){
+	vector <int> non_heapified;
 	if(!root){
 		printf("No reference provided to the tree.");
-		return;
+		return non_heapified;
 	}
-	vector <int> non_heapified;
-	queue <int> level_order_q;
+	queue <Node*> level_order_q;
 	level_order_q.push(root);
 	while(!level_order_q.empty()){
 		Node *top = level_order_q.front();
-		if(top->left_child)
+		if(top->left)
 			level_order_q.push(top->left);
-		if(top->right_child)
+		if(top->right)
 			level_order_q.push(top->right);
 		heap_ref.push_back(top->data);
 		level_order_q.pop();
 	}
+}
+
+int Heap::find_max_in_min_heap(){
+	if(!heap_ref.size()){
+		printf("Empty heap");
+		return 0;
+	}
+	int max, lci;
+	for(int i = 0; i < heap_ref.size() - 1;){
+		lci = (2*i) + 1;
+		if(lci < heap_ref.size()){
+			max = heap_ref[lci];
+			printf("max: %d\n", max);
+			i = lci;
+		} else {
+			max = heap_ref[i];
+			i++;
+		}
+	} return max;
 }

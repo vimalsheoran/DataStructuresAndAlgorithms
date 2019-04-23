@@ -36,6 +36,9 @@ int main(){
 			heap.push(6);
 			heap.push(7);
 			heap.push(5);
+			heap.print_heap();
+			data = heap.find_max_in_min_heap();
+			printf("%d\n", data);
 			break;
 
 			case 8:
