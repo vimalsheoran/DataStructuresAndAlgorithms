@@ -2,31 +2,19 @@
 
 using namespace std;
 
-unsigned long factorial(int number){
-	if(number == 0) return 1;
-	return number*factorial(number-1);
-}
-
-int count_trailing_zeroes(long number){
+void count_zero(int n){
 	int count = 0;
-	for(int i = 5; number/i >= 1; i *= 5)
-		count += number/i;
-	return count;
+	for(int i = 5; n/i >= 1; i *= 5){
+		count += n/i;
+	}
+	printf("%d\n", count);
 }
 
 int main(){
-	int input_length, input;
-	cin >> input_length;
-	while(input_length--){
-		cin >> input;
-		unsigned long fact = factorial(input);
-		printf("%li\n", fact);
-		int trailing_zeroes = count_trailing_zeroes(fact);
-		printf("%d\n", trailing_zeroes);
+	int input_size, num;
+	cin >> input_size;
+	for(int i = 0; i < input_size; i++){
+		cin >> num;
+		count_zero(num);
 	}
-	// printf("Let's test exponent function\n");
-	// cin >> a >> b;
-	// long prod = exponent(a, b);
-	// printf("%li\n", prod);
-	// return 0;
 }
