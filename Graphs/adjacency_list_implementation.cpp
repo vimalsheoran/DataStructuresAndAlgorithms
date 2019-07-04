@@ -17,14 +17,14 @@ vector <Vertex*> graph;
 */
 
 void search_for_base_target(int base, int target){
-	if(base > graph.size()){
+	if(base >= graph.size()){
 		for(int i = graph.size() - 1; i <= base; i++){
 			Vertex *temp = (Vertex *)malloc(sizeof(Vertex));
 			temp->value = i;
 			graph.push_back(temp);
 		}
 	}
-	if(target > graph.size()){
+	if(target >= graph.size()){
 		for(int i = graph.size() - 1; i <= target; i++){
 			Vertex *temp = (Vertex*)malloc(sizeof(Vertex));
 			temp->value = i;
@@ -44,6 +44,16 @@ void debug_graph(){
 			printf("%d ", graph[i]->connected[j]);
 		}
 		printf("\n");
+	}
+}
+
+void remove_connected_vertex(int base, int target){
+	vector <int>::iterator it = graph[base]->connected.begin();
+	for(; it != graph[base]->connected.end(); it++){
+		if(target == *it){
+			graph[base]->connected.erase(it);
+			break;
+		}
 	}
 }
 
@@ -70,6 +80,18 @@ void add_edge(){
 	printf("Successfully added an edge.\n");
 }
 
+void delete_edge(){
+	int base, target;
+	cin >> base >> target;
+	if(base >= graph.size() || target >= graph.size() || !graph.size()){
+		printf("Cannot delete base or target out of bounds.\n");
+		return;
+	}
+	remove_connected_vertex(base, target);
+	remove_connected_vertex(target, base);
+	printf("Successfully removed an edge.\n");
+}
+
 int main(){
 	int choice; 
 
@@ -94,6 +116,13 @@ int main(){
 			printf("Enter the base vertex and target vertex: ");
 			add_edge();
 			break;
+
+			case 3:
+			printf("Enter the base vertex and target vertex: ");
+			delete_edge();
+			break;
+
+			
 
 			case 5:
 			debug_graph();
