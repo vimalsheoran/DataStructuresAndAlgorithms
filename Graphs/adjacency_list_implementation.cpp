@@ -92,8 +92,25 @@ void delete_edge(){
 	printf("Successfully removed an edge.\n");
 }
 
+bool check_for_edge(){
+	int base, target;
+	cin >> base >> target;
+	if(base >= graph.size() || target >= graph.size()){
+		printf("Either base or target or both don't exist in the graph.");
+		return false;
+	}
+	bool found = false;
+	vector<int>::iterator it = graph[base]->connected.begin();
+	while(it != graph[base]->connected.end()){
+		if(*it == target) found = true;
+		it++;
+	}
+	return found;
+}
+
 int main(){
-	int choice; 
+	int choice;
+	bool exists; 
 
 	while(true){
 		printf("Welcome to graph.\n");
@@ -122,7 +139,11 @@ int main(){
 			delete_edge();
 			break;
 
-			
+			case 4:
+			printf("Enter the base vertex and target vertex: ");
+			exists = check_for_edge();
+			if(exists) printf("Edge found!\n"); else printf("No edge found :-(\n");
+			break;
 
 			case 5:
 			debug_graph();
