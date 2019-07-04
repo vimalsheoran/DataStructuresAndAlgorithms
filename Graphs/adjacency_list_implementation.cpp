@@ -1,6 +1,8 @@
 #include <iostream>
 #include <vector>
 
+// This graph is intended to be undirected
+
 using namespace std;
 
 struct Vertex {
@@ -8,13 +10,68 @@ struct Vertex {
 	vector <int> connected;
 };
 
-vector <Vertex> graph;
+vector <Vertex*> graph;
 
-void generate_graph(int no_of_nodes);
+/*
+* Helper functions
+*/
+
+void search_for_base_target(int base, int target){
+	if(base > graph.size()){
+		for(int i = graph.size() - 1; i <= base; i++){
+			Vertex *temp = (Vertex *)malloc(sizeof(Vertex));
+			temp->value = i;
+			graph.push_back(temp);
+		}
+	}
+	if(target > graph.size()){
+		for(int i = graph.size() - 1; i <= target; i++){
+			Vertex *temp = (Vertex*)malloc(sizeof(Vertex));
+			temp->value = i;
+			graph.push_back(temp);
+		}
+	}
+}
+
+void debug_graph(){
+	int size = graph.size();
+	for(int i = 0; i < size; i++){
+		int index_val = graph[i]->value;
+		int connected_edges = graph[i]->connected.size();
+		printf("%d\n", index_val);
+		printf("Connected edges are: ");
+		for(int j = 0; j < connected_edges; j++){
+			printf("%d ", graph[i]->connected[j]);
+		}
+		printf("\n");
+	}
+}
+
+/*
+	Higher order Functions
+*/
+
+void generate_graph(){
+	int no_of_nodes;
+	cin >> no_of_nodes;
+	for(int i = 0; i < no_of_nodes; i++){
+		Vertex* temp = (Vertex*) malloc (sizeof(Vertex));
+		temp->value = i;
+		graph.push_back(temp);
+	}
+}
+
+void add_edge(){
+	int base, target;
+	cin >> base >> target;
+	search_for_base_target(base, target);
+	graph[base]->connected.push_back(target);
+	graph[target]->connected.push_back(base);
+	printf("Successfully added an edge.\n");
+}
 
 int main(){
 	int choice; 
-	int no_of_nodes;
 
 	while(true){
 		printf("Welcome to graph.\n");
@@ -30,8 +87,16 @@ int main(){
 			
 			case 1:
 			printf("Enter the total numbers of nodes: ");
-			scanf("%d", &no_of_nodes);
-			generate_graph(no_of_nodes);
+			generate_graph();
+			break;
+
+			case 2:
+			printf("Enter the base vertex and target vertex: ");
+			add_edge();
+			break;
+
+			case 5:
+			debug_graph();
 			break;
 
 			default:
@@ -39,13 +104,4 @@ int main(){
 			break;
 		}
 	}
-}
-
-void generate_graph(int no_of_nodes){
-	printf("Comes here");
-	for(int i = 0; i < no_of_nodes; i++){
-		printf("Comes here");
-		graph[i].value = i;
-	}
-	return;
 }
