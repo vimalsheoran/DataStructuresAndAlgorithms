@@ -1,0 +1,3 @@
+Questions that I was not able to solve during the contest.
+
+1. Minimum and Maximum (MMAX)
