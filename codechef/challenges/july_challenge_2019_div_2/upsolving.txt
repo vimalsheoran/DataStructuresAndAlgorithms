@@ -1,3 +1,7 @@
 Questions that I was not able to solve during the contest.
 
 1. Minimum and Maximum (MMAX)
+
+Questions where I got wrong answer
+
+1. Parity Again (PRTAGN) 
