@@ -1,6 +1,11 @@
 Questions that I was not able to solve during the contest.
 
 1. Minimum and Maximum (MMAX)
+2. Guess the Prime! (GUESSPRM)
+3. Circular Merge (CIRMERGE)
+4. Codechef War (CHFWAR)
+5. Hit the coconuts (CCC)
+6. Codechef War 2 (CHFWAR2)
 
 Questions where I got wrong answer
 
