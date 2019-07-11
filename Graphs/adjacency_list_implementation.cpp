@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <queue>
 
 // This graph is intended to be undirected
 
@@ -108,6 +109,32 @@ bool check_for_edge(){
 	return found;
 }
 
+void breadth_first_search(int start_vertex){
+	if(!graph.size()) {
+		printf("Graph is empty.\n"); return;
+	}
+	bool visited[graph.size()];
+	for(int i = 0; i < graph.size(); i++) visited[i] = false;
+	queue <int> traversal_queue;
+	visited[start_vertex] = true; 
+	traversal_queue.push(start_vertex);
+	vector<int>::iterator it;
+	while(!traversal_queue.empty()) {
+		int curr_val = traversal_queue.front();
+		traversal_queue.pop();
+		it = graph[curr_val]->connected.begin();
+		while(it != graph[curr_val]->connected.end()){
+			if(!visited[*it]){
+				visited[*it] = true;
+				traversal_queue.push(*it); 
+			}
+			it++;
+		}
+		printf("%d ", curr_val);
+	}
+	printf("\n");
+}
+
 int main(){
 	int choice;
 	bool exists; 
@@ -147,6 +174,16 @@ int main(){
 
 			case 5:
 			debug_graph();
+			break;
+
+			case 6:
+			printf("This is a test for checking out BFS algorithm implementation.\n");
+			generate_graph();
+			choice = 6;
+			while (choice--) {
+				add_edge();
+			}
+			breadth_first_search(2);
 			break;
 
 			default:
