@@ -1,57 +1,58 @@
 #include <iostream>
-#include <vector>
-#include <cstring>
 #include <cmath>
+#include <cstring>
+#include <set>
+
+#define ll long long
 
 using namespace std;
 
-vector <long long> primes;
+set<ll>primes;
 
-void simple_seive(long long lower_limit, long long upper_limit) {
-	long long limit = upper_limit-lower_limit + 1;
-	bool marked[limit+1];
-	memset(marked, true, sizeof(marked));
-	for (int i = 2; i*i <= limit; i++) {
-		if (marked[i] == true) {
-			for (int j = i*i; j <= limit; j += i) marked[j] = false;
-		}
-	}
-
-	for (int i = 2; i <= limit; i++) {
-		if (marked[i] == true) {
-			primes.push_back(i);
-			printf("%d ", i);
-		}
+void print_primes(ll lower_limit) {
+	set<ll>::iterator it;
+	for (it = primes.begin(); it != primes.end(); it++) {
+		if (*it >= lower_limit) printf("%lli ", *it);
 	}
 	printf("\n");
 }
 
-void segmented_seive(long long start, long long end) {
-	
-	long long lower_limit = start;
-	long long limit = floor(sqrt(end)) + 1;
-	long long upper_limit = end;
-
-	vector<long long>::iterator it = primes.begin();
-	simple_seive(lower_limit, limit);
+void simple_seive(ll limit) {
 	bool marked[limit+1];
+	memset(marked, true, sizeof(marked));
+	for (ll i = 2; i*i <= limit; i++) {
+		for (ll j = i*i; j <= limit; j += i) {
+			marked[j] = false;
+		}
+	}
+	for (ll i = 2; i <= limit; i++) {
+		if (marked[i]) {
+			primes.insert(i);
+		}
+	}
+}
 
-	long long low = limit;
-	long long high = 2*limit;
+void segmented_seive(ll lower_limit, ll upper_limit) {
+	ll limit = floor(sqrt(upper_limit)) + 1;
+	simple_seive(limit);
+	
+	ll low = limit;
+	ll high = limit*2;
 
-	while(low < end) {
-		if (high > end) high = end;
+	while (low < upper_limit) {
+		if (high > upper_limit) high = upper_limit;
+		bool marked[limit+1];
 		memset(marked, true, sizeof(marked));
-		for(; it != primes.end(); it++) {
-			for (long long i = low; i < high; i += *it) {
-				marked[i - low] = false;
+		set<ll>::iterator it;
+		for (it = primes.begin(); it != primes.end(); it++) {
+			ll loLim = floor(low/(*it)) * (*it);
+			if (loLim < low) loLim += (*it);
+			for (ll j = loLim; j < high; j += (*it)) {
+				marked[j-low] = false;
 			}
 		}
-		for (int i = 0; i <= limit; i++) {
-			if (marked[i]) {
-				printf("%lli ", i+low);
-				primes.push_back(i+low);
-			}
+		for (ll i = low; i < high; i++) {
+			if (marked[i - low]) primes.insert(i);
 		}
 		low += limit;
 		high += limit;
@@ -59,10 +60,9 @@ void segmented_seive(long long start, long long end) {
 }
 
 int main() {
-	long long start = 1, end = 10;
-	scanf("%lli", &start);
-	scanf("%lli", &end);
-	segmented_seive(start, end);
-	printf("\n");
-	return 0;
+	ll lower_limit, upper_limit;
+	cin >> lower_limit >> upper_limit;
+	segmented_seive(2, lower_limit - 1);
+	segmented_seive(lower_limit, upper_limit);
+	print_primes(lower_limit);
 }
