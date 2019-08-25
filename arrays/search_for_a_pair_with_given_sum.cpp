@@ -3,6 +3,7 @@
 
 using namespace std;
 
+// Two pointer technique
 void search_for_pair_sorted(int arr[], int N, int sum) {
 	int i = 0, j = N-1;
 	while(i < j) {
@@ -19,15 +20,16 @@ void search_for_pair_sorted(int arr[], int N, int sum) {
 	}
 }
 
+// HashMap approach
 void search_for_pair_unsorted(int arr[], int N, int sum) {
 	map <int, int> search_buff;
 	for (int i = 0; i < N; i++) {
 		search_buff[arr[i]] = 1;
 	}
 	for (int i = 0; i < N; i++) {
+		search_buff[arr[i]] = 0;
 		if (search_buff[sum - arr[i]] == 1) {
 			cout << "Pair found: " << arr[i] << " " << sum-arr[i] << endl;
-			break;
 		}
 	}
 }
